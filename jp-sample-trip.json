@@ -1,0 +1,924 @@
+{
+  "systemMessages": [
+    
+  ],
+  "journeys": [
+    {
+      "tripDuration": 480,
+      "tripRtDuration": 480,
+      "rating": 0,
+      "isAdditional": false,
+      "interchanges": 0,
+      "legs": [
+        {
+          "infos": [
+            
+          ],
+          "distance": 82,
+          "duration": 60,
+          "pathDescriptions": [
+            {
+              "coord": [
+                59.34313,
+                18.049067
+              ],
+              "cumDistance": 0,
+              "cumDuration": 0,
+              "distance": 0,
+              "duration": 0,
+              "fromCoordsIndex": 0,
+              "manoeuvre": "ORIGIN",
+              "name": "Karlbergsvägen",
+              "toCoordsIndex": 1,
+              "turnDirection": "UNKNOWN"
+            },
+            {
+              "coord": [
+                59.34313,
+                18.049067
+              ],
+              "cumDistance": 38,
+              "cumDuration": 35,
+              "distance": 38,
+              "duration": 35,
+              "fromCoordsIndex": 1,
+              "manoeuvre": "KEEP",
+              "name": "Karlbergsvägen",
+              "skyDirection": 180,
+              "toCoordsIndex": 2,
+              "turnDirection": "STRAIGHT"
+            },
+            {
+              "coord": [
+                59.343103,
+                18.048385
+              ],
+              "cumDistance": 43,
+              "cumDuration": 39,
+              "distance": 4,
+              "duration": 4,
+              "fromCoordsIndex": 2,
+              "manoeuvre": "TURN",
+              "name": "",
+              "properties": {
+                "OUTDOOR_TYPE": "HIKING_TRAIL"
+              },
+              "skyDirection": 265,
+              "toCoordsIndex": 3,
+              "turnDirection": "LEFT"
+            },
+            {
+              "coord": [
+                59.343061,
+                18.048385
+              ],
+              "cumDistance": 55,
+              "cumDuration": 46,
+              "distance": 11,
+              "duration": 7,
+              "fromCoordsIndex": 3,
+              "manoeuvre": "CONTINUE",
+              "name": "Fußgängerampel",
+              "properties": {
+                "OUTDOOR_TYPE": "TRAFFICLIGHT"
+              },
+              "skyDirection": 175,
+              "toCoordsIndex": 5,
+              "turnDirection": "STRAIGHT"
+            },
+            {
+              "coord": [
+                59.342956,
+                18.048394
+              ],
+              "cumDistance": 58,
+              "cumDuration": 49,
+              "distance": 3,
+              "duration": 2,
+              "fromCoordsIndex": 5,
+              "manoeuvre": "TURN",
+              "name": "Fußweg",
+              "skyDirection": 178,
+              "toCoordsIndex": 6,
+              "turnDirection": "RIGHT"
+            },
+            {
+              "coord": [
+                59.342952,
+                18.04834
+              ],
+              "cumDistance": 62,
+              "cumDuration": 53,
+              "distance": 4,
+              "duration": 4,
+              "fromCoordsIndex": 6,
+              "manoeuvre": "TURN",
+              "name": "Fußweg",
+              "skyDirection": 265,
+              "toCoordsIndex": 7,
+              "turnDirection": "SHARP_LEFT"
+            },
+            {
+              "coord": [
+                59.342919,
+                18.048376
+              ],
+              "cumDistance": 69,
+              "cumDuration": 58,
+              "distance": 6,
+              "duration": 4,
+              "fromCoordsIndex": 7,
+              "manoeuvre": "TURN",
+              "name": "Fußgängerampel",
+              "properties": {
+                "OUTDOOR_TYPE": "TRAFFICLIGHT"
+              },
+              "skyDirection": 151,
+              "toCoordsIndex": 9,
+              "turnDirection": "SHARP_RIGHT"
+            },
+            {
+              "coord": [
+                59.342915,
+                18.048268
+              ],
+              "cumDistance": 82,
+              "cumDuration": 70,
+              "distance": 13,
+              "duration": 12,
+              "fromCoordsIndex": 9,
+              "manoeuvre": "TURN",
+              "name": "Upplandsgatan",
+              "skyDirection": 266,
+              "toCoordsIndex": 10,
+              "turnDirection": "SHARP_LEFT"
+            },
+            {
+              "coord": [
+                59.342805,
+                18.048376
+              ],
+              "cumDistance": 82,
+              "cumDuration": 70,
+              "distance": 607,
+              "duration": 0,
+              "fromCoordsIndex": 10,
+              "manoeuvre": "ENTER",
+              "name": "Einstieg Zug",
+              "toCoordsIndex": 10,
+              "turnDirection": "UNKNOWN"
+            }
+          ],
+          "origin": {
+            "id": "coord:2009216:3745109:MRCV:Stockholm, Karlbergsvägen 14:0",
+            "name": "Stockholm, Karlbergsvägen 14",
+            "disassembledName": "Karlbergsvägen 14",
+            "type": "address",
+            "coord": [
+              59.342984,
+              18.049094
+            ],
+            "parent": {
+              "id": "placeID:33001080:-1",
+              "name": "Stockholm",
+              "type": "locality"
+            },
+            "departureTimeBaseTimetable": "2026-01-08T23:11:00Z",
+            "departureTimePlanned": "2026-01-08T23:11:00Z",
+            "departureTimeEstimated": "2026-01-08T23:11:00Z",
+            "properties": {
+              "area": "0"
+            }
+          },
+          "destination": {
+            "isGlobalId": true,
+            "id": "9021001010151000",
+            "name": "Odenplan, Stockholm",
+            "disassembledName": "Odenplan",
+            "type": "stop",
+            "coord": [
+              59.34281,
+              18.048385
+            ],
+            "niveau": 0,
+            "parent": {
+              "id": "placeID:33001080:1",
+              "name": "Stockholm",
+              "type": "locality"
+            },
+            "productClasses": [
+              5
+            ],
+            "arrivalTimeBaseTimetable": "2026-01-08T23:12:00Z",
+            "arrivalTimePlanned": "2026-01-08T23:12:00Z",
+            "arrivalTimeEstimated": "2026-01-08T23:12:00Z",
+            "properties": {
+              "stopId": "18010151",
+              "AREA_NIVEAU_DIVA": "0",
+              "area": "4"
+            }
+          },
+          "transportation": {
+            "product": {
+              "class": 100,
+              "name": "footpath",
+              "iconId": 100
+            },
+            "properties": {
+              "tripCode": 0,
+              "lineDisplay": "LINE"
+            },
+            "isSamtrafik": false
+          },
+          "stopSequence": [
+            
+          ],
+          "coords": [
+            [
+              59.342984,
+              18.049094
+            ],
+            [
+              59.34313,
+              18.049067
+            ],
+            [
+              59.343103,
+              18.048385
+            ],
+            [
+              59.343061,
+              18.048385
+            ],
+            [
+              59.343034,
+              18.048394
+            ],
+            [
+              59.342956,
+              18.048394
+            ],
+            [
+              59.342952,
+              18.04834
+            ],
+            [
+              59.342919,
+              18.048376
+            ],
+            [
+              59.342915,
+              18.048322
+            ],
+            [
+              59.342915,
+              18.048268
+            ],
+            [
+              59.342805,
+              18.048376
+            ]
+          ]
+        },
+        {
+          "infos": [
+            
+          ],
+          "duration": 240,
+          "footPathInfo": [
+            {
+              "duration": 240,
+              "footPathElem": [
+                {
+                  "attributes": {
+                    "distance": 0,
+                    "duration": 40,
+                    "elevDoorWidth": 0,
+                    "elevLength": 0,
+                    "elevWidth": 0,
+                    "maxStepHeight": 0,
+                    "narrowestWidth": -1,
+                    "numberSteps": 0,
+                    "rampInclination": 0,
+                    "rampLength": 0,
+                    "rampWidth": 0
+                  },
+                  "description": "",
+                  "destination": {
+                    "coord": [
+                      59.343208,
+                      18.045717
+                    ],
+                    "id": "9021001005320000",
+                    "isGlobalId": true,
+                    "name": "Stockholm Odenplan",
+                    "properties": {
+                      "area": 2,
+                      "areaGid": "",
+                      "areaName": "Stockholm Odenplan",
+                      "areaType": 1,
+                      "georef": "0:0::100",
+                      "platform": 0
+                    },
+                    "type": "stop"
+                  },
+                  "level": "LEVEL",
+                  "levelFrom": 0,
+                  "levelTo": 0,
+                  "openingHours": [
+                    
+                  ],
+                  "origin": {
+                    "coord": [
+                      59.34281,
+                      18.048385
+                    ],
+                    "id": "9021001010151000",
+                    "isGlobalId": true,
+                    "name": "Odenplan",
+                    "properties": {
+                      "area": 4,
+                      "areaGid": "",
+                      "areaName": "Odenplan",
+                      "areaType": 33,
+                      "georef": "0:0::100",
+                      "platform": 0
+                    },
+                    "type": "stop"
+                  },
+                  "type": "UNKNOWN"
+                }
+              ],
+              "position": "IDEST"
+            }
+          ],
+          "origin": {
+            "isGlobalId": true,
+            "id": "9021001010151000",
+            "name": "Odenplan, Stockholm",
+            "disassembledName": "Odenplan",
+            "type": "stop",
+            "coord": [
+              59.34281,
+              18.048385
+            ],
+            "niveau": 0,
+            "parent": {
+              "id": "placeID:33001080:1",
+              "name": "Stockholm",
+              "type": "locality"
+            },
+            "productClasses": [
+              5
+            ],
+            "departureTimeBaseTimetable": "2026-01-08T23:12:00Z",
+            "departureTimePlanned": "2026-01-08T23:12:00Z",
+            "departureTimeEstimated": "2026-01-08T23:12:00Z",
+            "properties": {
+              "stopId": "18010151",
+              "AREA_NIVEAU_DIVA": "0",
+              "area": "4"
+            }
+          },
+          "destination": {
+            "isGlobalId": true,
+            "id": "9025001000005321",
+            "name": "Stockholm Odenplan, Stockholm",
+            "disassembledName": "2",
+            "type": "platform",
+            "coord": [
+              59.343208,
+              18.045717
+            ],
+            "niveau": 0,
+            "parent": {
+              "isGlobalId": true,
+              "id": "9021001005320000",
+              "name": "Stockholm Odenplan, Stockholm",
+              "disassembledName": "Stockholm Odenplan",
+              "type": "stop",
+              "parent": {
+                "id": "placeID:33001080:1",
+                "name": "Stockholm",
+                "type": "locality"
+              },
+              "properties": {
+                "stopId": "18005320"
+              },
+              "coord": [
+                59.343213,
+                18.045717
+              ],
+              "niveau": 0
+            },
+            "productClasses": [
+              0
+            ],
+            "arrivalTimeBaseTimetable": "2026-01-08T23:16:00Z",
+            "arrivalTimePlanned": "2026-01-08T23:16:00Z",
+            "arrivalTimeEstimated": "2026-01-08T23:16:00Z",
+            "properties": {
+              "AREA_NIVEAU_DIVA": "0",
+              "area": "2",
+              "platform": "1",
+              "stoppingPointPlanned": "2",
+              "platformName": "2"
+            }
+          },
+          "transportation": {
+            "product": {
+              "class": 99,
+              "name": "footpath",
+              "iconId": 99
+            },
+            "properties": {
+              "tripCode": 0,
+              "lineDisplay": "LINE"
+            },
+            "isSamtrafik": false
+          },
+          "stopSequence": [
+            {
+              "isGlobalId": true,
+              "id": "9021001010151000",
+              "name": "Odenplan, Stockholm",
+              "disassembledName": "Odenplan",
+              "type": "stop",
+              "coord": [
+                59.34281,
+                18.048385
+              ],
+              "niveau": 0,
+              "parent": {
+                "id": "placeID:33001080:1",
+                "name": "Stockholm",
+                "type": "locality"
+              },
+              "productClasses": [
+                5
+              ],
+              "properties": {
+                "stopId": "18010151",
+                "AREA_NIVEAU_DIVA": "0",
+                "area": "4",
+                "zone": "tfs:33"
+              },
+              "departureTimePlanned": "2026-01-08T23:12:00Z"
+            },
+            {
+              "isGlobalId": true,
+              "id": "9025001000005321",
+              "name": "Stockholm Odenplan, Stockholm",
+              "disassembledName": "Stockholm Odenplan",
+              "type": "platform",
+              "coord": [
+                59.343208,
+                18.045717
+              ],
+              "niveau": 0,
+              "parent": {
+                "isGlobalId": true,
+                "id": "9021001005320000",
+                "name": "Stockholm Odenplan, Stockholm",
+                "disassembledName": "Stockholm Odenplan",
+                "type": "stop",
+                "parent": {
+                  "id": "placeID:33001080:1",
+                  "name": "Stockholm",
+                  "type": "locality"
+                },
+                "properties": {
+                  "stopId": "18005320"
+                },
+                "coord": [
+                  59.343213,
+                  18.045717
+                ],
+                "niveau": 0
+              },
+              "productClasses": [
+                0
+              ],
+              "properties": {
+                "AREA_NIVEAU_DIVA": "0",
+                "area": "2",
+                "platform": "1",
+                "zone": "tfs:33"
+              },
+              "arrivalTimePlanned": "2026-01-08T23:16:00Z"
+            }
+          ],
+          "coords": [
+            [
+              59.34281,
+              18.048385
+            ],
+            [
+              59.343208,
+              18.045717
+            ]
+          ]
+        },
+        {
+          "infos": [
+            
+          ],
+          "duration": 180,
+          "origin": {
+            "isGlobalId": true,
+            "id": "9025001000005321",
+            "name": "Stockholm Odenplan, Stockholm",
+            "disassembledName": "2",
+            "type": "platform",
+            "coord": [
+              59.343208,
+              18.045717
+            ],
+            "niveau": 0,
+            "parent": {
+              "isGlobalId": true,
+              "id": "9021001005320000",
+              "name": "Stockholm Odenplan, Stockholm",
+              "disassembledName": "Stockholm Odenplan",
+              "type": "stop",
+              "parent": {
+                "id": "placeID:33001080:1",
+                "name": "Stockholm",
+                "type": "locality"
+              },
+              "properties": {
+                "stopId": "18005320"
+              },
+              "coord": [
+                59.343213,
+                18.045717
+              ],
+              "niveau": 0
+            },
+            "productClasses": [
+              0
+            ],
+            "departureTimeBaseTimetable": "2026-01-08T23:16:00Z",
+            "departureTimePlanned": "2026-01-08T23:16:00Z",
+            "departureTimeEstimated": "2026-01-08T23:16:00Z",
+            "properties": {
+              "AREA_NIVEAU_DIVA": "0",
+              "area": "2",
+              "platform": "1",
+              "stoppingPointPlanned": "2",
+              "platformName": "2"
+            }
+          },
+          "destination": {
+            "isGlobalId": true,
+            "id": "9025001000005313",
+            "name": "Stockholm City, Stockholm",
+            "disassembledName": "4",
+            "type": "platform",
+            "coord": [
+              59.331141,
+              18.059497
+            ],
+            "niveau": 0,
+            "parent": {
+              "isGlobalId": true,
+              "id": "9021001005310000",
+              "name": "Stockholm City, Stockholm",
+              "disassembledName": "Stockholm City",
+              "type": "stop",
+              "parent": {
+                "id": "placeID:33001080:1",
+                "name": "Stockholm",
+                "type": "locality"
+              },
+              "properties": {
+                "stopId": "18005310"
+              },
+              "coord": [
+                59.331141,
+                18.059443
+              ],
+              "niveau": 0
+            },
+            "productClasses": [
+              0
+            ],
+            "arrivalTimeBaseTimetable": "2026-01-08T23:19:00Z",
+            "arrivalTimePlanned": "2026-01-08T23:19:00Z",
+            "arrivalTimeEstimated": "2026-01-08T23:19:00Z",
+            "properties": {
+              "AREA_NIVEAU_DIVA": "0",
+              "area": "4",
+              "platform": "1",
+              "stoppingPointPlanned": "4",
+              "platformName": "4"
+            }
+          },
+          "transportation": {
+            "id": "tfs:04043: :H:y01",
+            "name": "Tåg Pendeltåg 43",
+            "number": "Pendeltåg 43",
+            "product": {
+              "id": 1,
+              "class": 0,
+              "name": "Tåg",
+              "iconId": 6
+            },
+            "operator": {
+              "id": "1",
+              "name": "Storstockholms Lokaltrafik"
+            },
+            "destination": {
+              "id": "18005310",
+              "name": "Stockholm City",
+              "type": "stop"
+            },
+            "properties": {
+              "tripCode": 79,
+              "timetablePeriod": "Current",
+              "lineDisplay": "LINE",
+              "globalId": "9011001004300000",
+              "RealtimeTripId": "9015001004302881",
+              "shortTrain": true,
+              "AVMSTripID": "9015001004302881"
+            },
+            "isSamtrafik": false,
+            "disassembledName": "43"
+          },
+          "stopSequence": [
+            {
+              "isGlobalId": true,
+              "id": "9025001000005321",
+              "name": "Stockholm Odenplan, Stockholm",
+              "disassembledName": "2",
+              "type": "platform",
+              "coord": [
+                59.343208,
+                18.045717
+              ],
+              "niveau": 0,
+              "parent": {
+                "isGlobalId": true,
+                "id": "9021001005320000",
+                "name": "Stockholm Odenplan, Stockholm",
+                "disassembledName": "Stockholm Odenplan",
+                "type": "stop",
+                "parent": {
+                  "id": "placeID:33001080:1",
+                  "name": "Stockholm",
+                  "type": "locality"
+                },
+                "properties": {
+                  "stopId": "18005320"
+                },
+                "coord": [
+                  59.343213,
+                  18.045717
+                ],
+                "niveau": 0
+              },
+              "productClasses": [
+                0
+              ],
+              "properties": {
+                "AREA_NIVEAU_DIVA": "0",
+                "area": "2",
+                "platform": "1",
+                "zone": "tfs:33",
+                "stoppingPointPlanned": "2",
+                "platformName": "2"
+              },
+              "departureTimePlanned": "2026-01-08T23:16:00Z",
+              "departureTimeEstimated": "2026-01-08T23:16:00Z"
+            },
+            {
+              "isGlobalId": true,
+              "id": "9025001000005313",
+              "name": "Stockholm City, Stockholm",
+              "disassembledName": "4",
+              "type": "platform",
+              "coord": [
+                59.331141,
+                18.059497
+              ],
+              "niveau": 0,
+              "parent": {
+                "isGlobalId": true,
+                "id": "9021001005310000",
+                "name": "Stockholm City, Stockholm",
+                "disassembledName": "Stockholm City",
+                "type": "stop",
+                "parent": {
+                  "id": "placeID:33001080:1",
+                  "name": "Stockholm",
+                  "type": "locality"
+                },
+                "properties": {
+                  "stopId": "18005310"
+                },
+                "coord": [
+                  59.331141,
+                  18.059443
+                ],
+                "niveau": 0
+              },
+              "productClasses": [
+                0
+              ],
+              "properties": {
+                "AREA_NIVEAU_DIVA": "0",
+                "area": "4",
+                "platform": "1",
+                "zone": "tfs:33",
+                "stoppingPointPlanned": "4",
+                "platformName": "4"
+              },
+              "arrivalTimePlanned": "2026-01-08T23:19:00Z",
+              "arrivalTimeEstimated": "2026-01-08T23:19:00Z"
+            }
+          ],
+          "properties": {
+            "tripId": "9015001004302881"
+          },
+          "coords": [
+            [
+              59.34326,
+              18.045777
+            ],
+            [
+              59.343146,
+              18.046175
+            ],
+            [
+              59.34291,
+              18.046973
+            ],
+            [
+              59.342693,
+              18.047734
+            ],
+            [
+              59.342566,
+              18.048224
+            ],
+            [
+              59.342419,
+              18.048773
+            ],
+            [
+              59.342262,
+              18.049395
+            ],
+            [
+              59.342094,
+              18.050046
+            ],
+            [
+              59.341949,
+              18.050578
+            ],
+            [
+              59.341829,
+              18.050981
+            ],
+            [
+              59.341705,
+              18.051405
+            ],
+            [
+              59.341567,
+              18.051815
+            ],
+            [
+              59.341365,
+              18.052386
+            ],
+            [
+              59.341174,
+              18.052854
+            ],
+            [
+              59.34099,
+              18.053278
+            ],
+            [
+              59.34077,
+              18.053754
+            ],
+            [
+              59.340526,
+              18.054207
+            ],
+            [
+              59.340302,
+              18.054617
+            ],
+            [
+              59.339797,
+              18.055384
+            ],
+            [
+              59.339539,
+              18.055706
+            ],
+            [
+              59.339359,
+              18.055925
+            ],
+            [
+              59.339105,
+              18.056211
+            ],
+            [
+              59.338764,
+              18.05654
+            ],
+            [
+              59.338491,
+              18.056773
+            ],
+            [
+              59.33824,
+              18.05697
+            ],
+            [
+              59.337829,
+              18.057255
+            ],
+            [
+              59.337563,
+              18.057408
+            ],
+            [
+              59.337133,
+              18.057598
+            ],
+            [
+              59.336771,
+              18.057722
+            ],
+            [
+              59.336277,
+              18.057882
+            ],
+            [
+              59.335978,
+              18.057969
+            ],
+            [
+              59.335533,
+              18.058115
+            ],
+            [
+              59.33524,
+              18.058195
+            ],
+            [
+              59.33481,
+              18.058304
+            ],
+            [
+              59.334327,
+              18.058435
+            ],
+            [
+              59.3338,
+              18.058566
+            ],
+            [
+              59.333149,
+              18.05874
+            ],
+            [
+              59.332648,
+              18.058856
+            ],
+            [
+              59.3323,
+              18.058966
+            ],
+            [
+              59.331809,
+              18.059082
+            ],
+            [
+              59.331386,
+              18.059176
+            ],
+            [
+              59.331127,
+              18.059239
+            ]
+          ],
+          "realtimeStatus": [
+            "MONITORED"
+          ],
+          "isRealtimeControlled": true
+        }
+      ],
+      "daysOfService": {
+        "rvb": "000000000000000000000000000001000000000000000000000000000000000000000000"
+      }
+    }
+  ]
+}

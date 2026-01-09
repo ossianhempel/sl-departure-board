@@ -1,0 +1,97 @@
+@import "tailwindcss";
+
+/*
+ * E-ink-friendly theme with high contrast
+ * CSS variables for easy theming and future dark/light mode
+ */
+
+:root {
+  /* Light theme (default) - optimized for e-ink readability */
+  --color-bg-primary: #ffffff;
+  --color-bg-secondary: #f5f5f5;
+  --color-bg-tertiary: #e5e5e5;
+  --color-text-primary: #0a0a0a;
+  --color-text-secondary: #404040;
+  --color-text-muted: #737373;
+  
+  /* Status colors with text labels (never color-only) */
+  --color-status-comfortable: #166534;
+  --color-status-tight: #854d0e;
+  --color-status-missed: #991b1b;
+  
+  /* Accent */
+  --color-accent: #1d4ed8;
+  --color-accent-hover: #1e40af;
+  
+  /* Borders */
+  --color-border: #d4d4d4;
+  --color-border-strong: #a3a3a3;
+  
+  /* Typography - large for e-ink readability */
+  --font-family: "JetBrains Mono", "SF Mono", "Fira Code", ui-monospace, monospace;
+  --font-size-base: 18px;
+  --line-height-base: 1.6;
+}
+
+/* Dark theme */
+.dark {
+  --color-bg-primary: #0a0a0a;
+  --color-bg-secondary: #171717;
+  --color-bg-tertiary: #262626;
+  --color-text-primary: #fafafa;
+  --color-text-secondary: #d4d4d4;
+  --color-text-muted: #a3a3a3;
+  
+  --color-status-comfortable: #4ade80;
+  --color-status-tight: #fbbf24;
+  --color-status-missed: #f87171;
+  
+  --color-accent: #60a5fa;
+  --color-accent-hover: #93c5fd;
+  
+  --color-border: #404040;
+  --color-border-strong: #525252;
+}
+
+/* Base styles */
+html {
+  font-size: var(--font-size-base);
+  font-family: var(--font-family);
+  line-height: var(--line-height-base);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  min-height: 100vh;
+}
+
+/* Disable animations for e-ink compatibility */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Utility classes for theme colors */
+@theme {
+  --color-bg-primary: var(--color-bg-primary);
+  --color-bg-secondary: var(--color-bg-secondary);
+  --color-bg-tertiary: var(--color-bg-tertiary);
+  --color-text-primary: var(--color-text-primary);
+  --color-text-secondary: var(--color-text-secondary);
+  --color-text-muted: var(--color-text-muted);
+  --color-status-comfortable: var(--color-status-comfortable);
+  --color-status-tight: var(--color-status-tight);
+  --color-status-missed: var(--color-status-missed);
+  --color-accent: var(--color-accent);
+  --color-border: var(--color-border);
+  --color-border-strong: var(--color-border-strong);
+}

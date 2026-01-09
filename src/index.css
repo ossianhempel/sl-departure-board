@@ -1,56 +1,70 @@
 @import "tailwindcss";
 
 /*
- * E-ink-friendly theme with high contrast
- * CSS variables for easy theming and future dark/light mode
+ * Modern & Fun Theme
+ * Vibrant colors, soft shadows, and rounded aesthetics.
  */
 
 :root {
-  /* Light theme (default) - optimized for e-ink readability */
-  --color-bg-primary: #ffffff;
-  --color-bg-secondary: #f5f5f5;
-  --color-bg-tertiary: #e5e5e5;
-  --color-text-primary: #0a0a0a;
-  --color-text-secondary: #404040;
-  --color-text-muted: #737373;
+  /* Light theme (default) */
+  --color-bg-primary: #f8fafc; /* Slate-50 */
+  --color-bg-secondary: #ffffff;
+  --color-bg-tertiary: #f1f5f9; /* Slate-100 */
   
-  /* Status colors with text labels (never color-only) */
-  --color-status-comfortable: #166534;
-  --color-status-tight: #854d0e;
-  --color-status-missed: #991b1b;
+  --color-text-primary: #0f172a; /* Slate-900 */
+  --color-text-secondary: #334155; /* Slate-700 */
+  --color-text-muted: #64748b; /* Slate-500 */
+  
+  /* Status colors - Vibrant & Clear */
+  --color-status-comfortable: #10b981; /* Emerald-500 */
+  --color-status-tight: #f59e0b; /* Amber-500 */
+  --color-status-missed: #ef4444; /* Red-500 */
   
   /* Accent */
-  --color-accent: #1d4ed8;
-  --color-accent-hover: #1e40af;
+  --color-accent: #6366f1; /* Indigo-500 */
+  --color-accent-hover: #4f46e5; /* Indigo-600 */
   
   /* Borders */
-  --color-border: #d4d4d4;
-  --color-border-strong: #a3a3a3;
+  --color-border: #e2e8f0; /* Slate-200 */
+  --color-border-strong: #cbd5e1; /* Slate-300 */
+
+  /* Shadows */
+  --shadow-card: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-card-hover: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
   
-  /* Typography - large for e-ink readability */
-  --font-family: "JetBrains Mono", "SF Mono", "Fira Code", ui-monospace, monospace;
-  --font-size-base: 18px;
-  --line-height-base: 1.6;
+  /* Typography */
+  --font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-family-mono: "JetBrains Mono", "SF Mono", "Fira Code", ui-monospace, monospace;
+  --font-size-base: 16px;
+  --line-height-base: 1.5;
+
+  /* Radius */
+  --radius-card: 16px;
+  --radius-btn: 8px;
 }
 
 /* Dark theme */
 .dark {
-  --color-bg-primary: #0a0a0a;
-  --color-bg-secondary: #171717;
-  --color-bg-tertiary: #262626;
-  --color-text-primary: #fafafa;
-  --color-text-secondary: #d4d4d4;
-  --color-text-muted: #a3a3a3;
+  --color-bg-primary: #0f172a; /* Slate-900 */
+  --color-bg-secondary: #1e293b; /* Slate-800 */
+  --color-bg-tertiary: #334155; /* Slate-700 */
   
-  --color-status-comfortable: #4ade80;
-  --color-status-tight: #fbbf24;
-  --color-status-missed: #f87171;
+  --color-text-primary: #f8fafc; /* Slate-50 */
+  --color-text-secondary: #cbd5e1; /* Slate-300 */
+  --color-text-muted: #94a3b8; /* Slate-400 */
   
-  --color-accent: #60a5fa;
-  --color-accent-hover: #93c5fd;
+  --color-status-comfortable: #34d399; /* Emerald-400 */
+  --color-status-tight: #fbbf24; /* Amber-400 */
+  --color-status-missed: #f87171; /* Red-400 */
   
-  --color-border: #404040;
-  --color-border-strong: #525252;
+  --color-accent: #818cf8; /* Indigo-400 */
+  --color-accent-hover: #a5b4fc; /* Indigo-300 */
+  
+  --color-border: #334155; /* Slate-700 */
+  --color-border-strong: #475569; /* Slate-600 */
+
+  --shadow-card: 0 4px 6px -1px rgb(0 0 0 / 0.3), 0 2px 4px -2px rgb(0 0 0 / 0.3);
+  --shadow-card-hover: 0 10px 15px -3px rgb(0 0 0 / 0.4), 0 4px 6px -4px rgb(0 0 0 / 0.4);
 }
 
 /* Base styles */
@@ -67,17 +81,7 @@ body {
   background-color: var(--color-bg-primary);
   color: var(--color-text-primary);
   min-height: 100vh;
-}
-
-/* Disable animations for e-ink compatibility */
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* Utility classes for theme colors */
@@ -92,6 +96,38 @@ body {
   --color-status-tight: var(--color-status-tight);
   --color-status-missed: var(--color-status-missed);
   --color-accent: var(--color-accent);
+  --color-accent-hover: var(--color-accent-hover);
   --color-border: var(--color-border);
   --color-border-strong: var(--color-border-strong);
+  
+  --font-mono: var(--font-family-mono);
+  
+  --shadow-card: var(--shadow-card);
+  --shadow-card-hover: var(--shadow-card-hover);
+  
+  --radius-card: var(--radius-card);
+  --radius-btn: var(--radius-btn);
+}
+
+/* Custom utilities */
+.card {
+  background-color: var(--color-bg-secondary);
+  border-radius: var(--radius-card);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-card);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  /* Only hover effect on interactive cards if needed, but looks nice generally */
+  border-color: var(--color-border-strong);
+}
+
+.btn {
+  border-radius: var(--radius-btn);
+  transition: all 0.2s ease;
+}
+
+.btn:active {
+  transform: scale(0.98);
 }

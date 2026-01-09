@@ -46,18 +46,20 @@ export function DepartureBoard({
   }
 
   return (
-    <div className="bg-bg-secondary rounded-lg border border-border overflow-hidden">
+    <div className="card overflow-hidden">
       {/* Header */}
-      <div className="px-4 py-3 border-b border-border flex items-center justify-between">
-        <h4 className="font-semibold text-text-primary">
+      <div className="px-5 py-3 border-b border-border/50 bg-bg-secondary/50 backdrop-blur-sm flex items-center justify-between">
+        <h4 className="font-bold text-text-primary flex items-center gap-2">
           {stationName || "Departures"}
         </h4>
         {lastUpdated && (
           <span
-            className={`text-xs ${isStale ? "text-status-tight" : "text-text-muted"}`}
+            className={`text-xs px-2 py-0.5 rounded-full ${
+              isStale ? "bg-status-tight/10 text-status-tight" : "bg-bg-tertiary text-text-muted"
+            }`}
           >
             {isStale && "⚠ "}
-            {formatLastUpdated(lastUpdated)}
+            Updated {formatLastUpdated(lastUpdated)}
           </span>
         )}
       </div>
@@ -65,11 +67,15 @@ export function DepartureBoard({
       {/* Content */}
       <div className="p-2">
         {isLoading ? (
-          <div className="text-center py-4 text-text-muted">Loading...</div>
+          <div className="flex justify-center py-6 text-text-muted">
+             <span className="animate-pulse">Loading departures...</span>
+          </div>
         ) : error && departures.length === 0 ? (
-          <div className="text-center py-4 text-text-muted">{error}</div>
+          <div className="text-center py-6 text-status-missed bg-status-missed/5 rounded-lg m-2">
+            <p className="font-semibold">{error}</p>
+          </div>
         ) : departures.length === 0 ? (
-          <div className="text-center py-4 text-text-muted">No departures</div>
+          <div className="text-center py-6 text-text-muted">No departures found</div>
         ) : compact ? (
           <CompactDepartureList departures={departures} />
         ) : (
@@ -90,12 +96,13 @@ interface GroupedDepartureListProps {
 
 function GroupedDepartureList({ groups }: GroupedDepartureListProps) {
   return (
-    <div className="space-y-3">
+    <div className="space-y-4 p-2">
       {groups.map((group) => (
         <div key={group.type}>
           {/* Group header */}
-          <div className="text-xs font-semibold text-text-muted uppercase tracking-wider mb-1 px-2">
-            {getTransportIcon(group.type)} {group.label}
+          <div className="text-xs font-bold text-text-muted uppercase tracking-wider mb-2 flex items-center gap-1.5">
+            <span className="text-lg">{getTransportIcon(group.type)}</span> 
+            {group.label}
           </div>
           {/* Departures */}
           <div className="space-y-1">
@@ -119,7 +126,7 @@ interface CompactDepartureListProps {
 
 function CompactDepartureList({ departures }: CompactDepartureListProps) {
   return (
-    <div className="divide-y divide-border">
+    <div className="divide-y divide-border/50">
       {departures.map((dep, index) => (
         <DepartureRow key={index} departure={dep} compact />
       ))}
@@ -153,37 +160,54 @@ function DepartureRow({ departure, compact = false }: DepartureRowProps) {
   return (
     <div
       className={`
-        flex items-center justify-between px-2 py-1.5 rounded
-        ${isCancelled ? "opacity-50 line-through" : ""}
-        ${compact ? "" : "hover:bg-bg-tertiary"}
+        flex items-center justify-between px-3 py-2 rounded-lg transition-colors
+        ${isCancelled ? "opacity-60 bg-status-missed/5" : ""}
+        ${compact ? "hover:bg-bg-tertiary/50" : "hover:bg-bg-tertiary"}
       `}
     >
       {/* Line and destination */}
-      <div className="flex items-center gap-2 min-w-0 flex-1">
+      <div className="flex items-center gap-3 min-w-0 flex-1">
         {!compact && (
-          <span className="text-sm">{getTransportIcon(type)}</span>
+          <span className="text-xl opacity-80 w-6 text-center">{getTransportIcon(type)}</span>
         )}
-        <span className="font-mono font-semibold text-sm bg-bg-tertiary px-1.5 py-0.5 rounded">
+        <span className={`
+            font-mono font-bold text-sm px-2 py-0.5 rounded shadow-sm text-center min-w-[2.5rem]
+            ${type === 'metro' ? 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300' : ''}
+            ${type === 'bus' ? 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300' : ''}
+            ${type === 'train' ? 'bg-slate-200 text-slate-800 dark:bg-slate-700 dark:text-slate-300' : ''}
+            ${type === 'tram' ? 'bg-orange-100 text-orange-800 dark:bg-orange-900/30 dark:text-orange-300' : ''}
+            ${!['metro', 'bus', 'train', 'tram'].includes(type) ? 'bg-bg-tertiary text-text-primary' : ''}
+        `}>
           {line}
         </span>
-        <span className="truncate text-sm text-text-secondary">{destination}</span>
+        <div className="flex flex-col min-w-0">
+           <span className={`truncate font-medium ${isCancelled ? 'line-through decoration-status-missed' : 'text-text-primary'}`}>
+             {destination}
+           </span>
+           {isCancelled && <span className="text-xs text-status-missed font-bold uppercase">Cancelled</span>}
+        </div>
       </div>
 
       {/* Platform */}
       {platform && !compact && (
-        <span className="text-xs text-text-muted mx-2">Plat. {platform}</span>
+        <span className="text-xs font-mono text-text-muted mx-2 bg-bg-primary border border-border px-1.5 py-0.5 rounded">
+          Plat {platform}
+        </span>
       )}
 
       {/* Time */}
-      <div className="flex items-center gap-1 whitespace-nowrap">
-        {isDelayed && <span className="text-status-tight text-xs">⚠</span>}
+      <div className="flex items-center gap-1.5 whitespace-nowrap pl-2">
+        {isDelayed && (
+          <span className="text-status-tight text-lg animate-pulse" title="Delayed">⚠</span>
+        )}
         <span
           className={`
-            font-semibold text-sm
-            ${minutesUntil <= 2 ? "text-status-tight" : "text-text-primary"}
+            font-bold text-right min-w-[3rem]
+            ${minutesUntil <= 2 && !isCancelled ? "text-status-tight" : "text-text-primary"}
+            ${isCancelled ? "text-text-muted" : ""}
           `}
         >
-          {timeDisplay}
+          {isCancelled ? "--" : timeDisplay}
         </span>
       </div>
     </div>

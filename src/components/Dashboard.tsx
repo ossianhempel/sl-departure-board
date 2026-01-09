@@ -63,17 +63,17 @@ export function Dashboard() {
   }
 
   return (
-    <div className="min-h-screen bg-bg-primary">
+    <div className="min-h-screen bg-bg-primary bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-indigo-50/50 via-bg-primary to-bg-primary dark:from-indigo-950/20 dark:via-bg-primary dark:to-bg-primary transition-colors duration-300">
       {/* Header */}
       {!isKioskMode && (
-        <header className="sticky top-0 z-10 bg-bg-primary border-b border-border">
-          <div className="max-w-6xl mx-auto px-4 py-3">
+        <header className="sticky top-0 z-10 bg-bg-primary/80 backdrop-blur-md border-b border-border transition-colors duration-300">
+          <div className="max-w-6xl mx-auto px-4 py-4">
             {/* Responsive header: avoid button overlap on small screens */}
-            <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
               {/* Title and status */}
               <div>
-                <h1 className="text-xl font-bold text-text-primary">Commute Dashboard</h1>
-                <div className="flex items-center gap-4 text-sm text-text-muted mt-1">
+                <h1 className="text-2xl font-bold text-text-primary tracking-tight">Commute Dashboard</h1>
+                <div className="flex items-center gap-4 text-sm text-text-muted mt-1 font-medium">
                   {lastUpdated && (
                     <span>
                       Updated {formatLastUpdated(lastUpdated, currentTime)}
@@ -81,7 +81,10 @@ export function Dashboard() {
                     </span>
                   )}
                   {error && (
-                    <span className="text-status-tight">⚠ {error}</span>
+                    <span className="text-status-tight flex items-center gap-1">
+                      <span className="inline-block w-2 h-2 rounded-full bg-status-tight animate-pulse" />
+                      {error}
+                    </span>
                   )}
                 </div>
               </div>
@@ -91,13 +94,13 @@ export function Dashboard() {
                 <button
                   onClick={() => refresh()}
                   disabled={isRefreshing}
-                  className="px-3 py-1.5 text-sm bg-bg-secondary border border-border rounded hover:bg-bg-tertiary disabled:opacity-50 shrink-0 min-w-[6.5rem]"
+                  className="btn px-4 py-2 text-sm font-medium bg-bg-secondary border border-border text-text-secondary hover:bg-bg-tertiary hover:border-border-strong disabled:opacity-50 disabled:cursor-not-allowed shadow-sm transition-all"
                 >
                   {isRefreshing ? "Refreshing..." : "Refresh"}
                 </button>
                 <Link
                   to="/setup"
-                  className="px-3 py-1.5 text-sm bg-accent text-white rounded hover:opacity-90 shrink-0"
+                  className="btn px-4 py-2 text-sm font-medium bg-accent text-white hover:bg-accent-hover shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all"
                 >
                   Setup
                 </Link>
@@ -106,7 +109,7 @@ export function Dashboard() {
 
             {/* Deviations summary */}
             {settings.showDeviations && allDeviations.length > 0 && (
-              <div className="mt-2 pt-2 border-t border-border">
+              <div className="mt-4 pt-3 border-t border-border">
                 <DeviationSummary deviations={allDeviations} />
               </div>
             )}
@@ -116,15 +119,15 @@ export function Dashboard() {
 
       {/* Kiosk header */}
       {isKioskMode && (
-        <header className="bg-bg-primary border-b-2 border-border py-4 px-6">
+        <header className="bg-bg-primary border-b-2 border-border py-6 px-8">
           <div className="flex items-center justify-between">
-            <h1 className="text-2xl font-bold">SL Commute</h1>
+            <h1 className="text-3xl font-bold tracking-tight">SL Commute</h1>
             <div className="text-right">
-              <div className="text-3xl font-mono font-bold">
+              <div className="text-4xl font-mono font-bold tracking-tight text-text-primary">
                 {formatTimeWithSeconds(currentTime)}
               </div>
               {lastUpdated && (
-                <div className="text-sm text-text-muted">
+                <div className="text-base text-text-muted mt-1">
                   Data: {formatLastUpdated(lastUpdated, currentTime)}
                 </div>
               )}
@@ -134,20 +137,18 @@ export function Dashboard() {
       )}
 
       {/* Main content */}
-      <main className={`${isKioskMode ? "p-6" : "max-w-6xl mx-auto px-4 py-6"}`}>
+      <main className={`${isKioskMode ? "p-8" : "max-w-6xl mx-auto px-4 py-8"}`}>
         {/* Loading state */}
         {isLoading ? (
-          <div className="flex items-center justify-center py-20">
-            <div className="text-center">
-              <div className="text-4xl mb-4">🚇</div>
-              <p className="text-text-muted">Loading commutes...</p>
-            </div>
+          <div className="flex flex-col items-center justify-center py-32 animate-fade-in">
+            <div className="text-6xl mb-6 animate-bounce">🚇</div>
+            <p className="text-xl font-medium text-text-muted">Loading your commutes...</p>
           </div>
         ) : (
           <>
             {/* Deviation banner */}
             {settings.showDeviations && allDeviations.length > 0 && !isKioskMode && (
-              <div className="mb-6">
+              <div className="mb-8">
                 <DeviationBanner deviations={allDeviations} limit={2} />
               </div>
             )}
@@ -160,19 +161,20 @@ export function Dashboard() {
               `}
             >
               {data.map((commuteData) => (
-                <div key={commuteData.commute.id}>
+                <div key={commuteData.commute.id} className="contents">
                   {isKioskMode ? (
                     <CompactCommuteCard data={commuteData} now={currentTime} />
                   ) : (
                     <CommuteCard data={commuteData} now={currentTime} />
                   )}
-
-                  {/* Departure board (optional) */}
+                  
+                  {/* Departure board is handled inside CommuteCard or separately depending on design, 
+                      but preserving current logic of separate component */}
                   {settings.showDepartureBoards &&
                     commuteData.origin.transportSiteId &&
                     !isKioskMode && (
-                      <div className="mt-4">
-                        <DepartureBoard
+                      <div className="mt-4 card p-4">
+                         <DepartureBoard
                           siteId={commuteData.origin.transportSiteId}
                           stationName={`Departures from ${commuteData.origin.label}`}
                           limit={6}
@@ -189,8 +191,8 @@ export function Dashboard() {
 
       {/* Kiosk footer */}
       {isKioskMode && (
-        <footer className="fixed bottom-0 left-0 right-0 bg-bg-secondary border-t border-border py-2 px-6">
-          <div className="flex items-center justify-between text-sm text-text-muted">
+        <footer className="fixed bottom-0 left-0 right-0 bg-bg-secondary border-t border-border py-3 px-8 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)]">
+          <div className="flex items-center justify-between text-lg font-medium text-text-muted">
             <span>Refresh: {settings.refreshIntervalSeconds}s</span>
             {allDeviations.length > 0 && (
               <DeviationSummary deviations={allDeviations} />
@@ -209,19 +211,19 @@ export function Dashboard() {
 
 function EmptyState() {
   return (
-    <div className="min-h-screen bg-bg-primary flex items-center justify-center p-4">
-      <div className="text-center max-w-md">
-        <div className="text-6xl mb-6">🚇</div>
-        <h1 className="text-2xl font-bold text-text-primary mb-2">
-          Welcome to SL Commute Dashboard
+    <div className="min-h-screen bg-bg-primary bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-indigo-50/50 via-bg-primary to-bg-primary flex items-center justify-center p-4">
+      <div className="card max-w-lg w-full p-12 text-center shadow-xl border-border/50 bg-bg-secondary/80 backdrop-blur-sm">
+        <div className="text-7xl mb-8 transform hover:scale-110 transition-transform duration-300 inline-block">🚇</div>
+        <h1 className="text-3xl font-bold text-text-primary mb-4 tracking-tight">
+          SL Commute Dashboard
         </h1>
-        <p className="text-text-secondary mb-6">
-          Set up your places and commutes to see when you need to leave to catch
+        <p className="text-text-secondary text-lg mb-8 leading-relaxed">
+          Set up your places and commutes to see exactly when you need to leave to catch
           your train, bus, or metro.
         </p>
         <Link
           to="/setup"
-          className="inline-block px-6 py-3 bg-accent text-white rounded-lg font-semibold hover:opacity-90"
+          className="btn inline-block px-8 py-4 bg-accent text-white rounded-xl font-bold text-lg shadow-lg hover:shadow-xl hover:-translate-y-1 hover:bg-accent-hover transition-all"
         >
           Get Started →
         </Link>

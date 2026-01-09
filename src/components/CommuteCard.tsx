@@ -36,16 +36,16 @@ export function CommuteCard({ data, compact = false, now = new Date() }: Commute
   // No trips available
   if (trips.length === 0) {
     return (
-      <div className="bg-bg-secondary rounded-lg p-4 border border-border">
+      <div className="card p-6 border border-border bg-bg-secondary flex flex-col items-center justify-center text-center">
         <CardHeader label={commute.label} origin={origin.label} destination={destination.label} />
-        <div className="mt-4 text-center text-text-muted py-8">
+        <div className="mt-6 p-4 bg-bg-tertiary rounded-lg w-full">
           {error ? (
             <div>
               <p className="font-semibold text-status-missed">Connection error</p>
-              <p className="text-sm mt-1">{error}</p>
+              <p className="text-sm mt-1 text-text-muted">{error}</p>
             </div>
           ) : (
-            <p>No trips available</p>
+            <p className="text-text-muted">No upcoming trips found.</p>
           )}
         </div>
       </div>
@@ -55,12 +55,12 @@ export function CommuteCard({ data, compact = false, now = new Date() }: Commute
   return (
     <div
       className={`
-        bg-bg-secondary rounded-lg border border-border overflow-hidden
-        ${isStale ? "border-status-tight" : ""}
+        card overflow-hidden transition-all duration-300
+        ${isStale ? "ring-2 ring-status-tight border-transparent" : "hover:shadow-card-hover"}
       `}
     >
       {/* Header */}
-      <div className="p-4 border-b border-border">
+      <div className="p-5 border-b border-border/50 bg-bg-secondary/50 backdrop-blur-sm">
         <CardHeader
           label={commute.label}
           origin={origin.label}
@@ -68,11 +68,13 @@ export function CommuteCard({ data, compact = false, now = new Date() }: Commute
           isStale={isStale}
           lastUpdated={data.lastUpdated}
           now={now}
+          prepSeconds={origin.prepSeconds}
+          bufferSeconds={commute.bufferSeconds}
         />
       </div>
 
       {/* Trip list */}
-      <div className={compact ? "divide-y divide-border" : "p-4 space-y-3"}>
+      <div className={compact ? "divide-y divide-border" : "p-5 space-y-4 bg-bg-secondary"}>
         {(() => {
           const items = trips
             .map((trip, index) => ({ trip, index, leaveCalc: leaveCalculations[index] }))
@@ -121,8 +123,8 @@ export function CommuteCard({ data, compact = false, now = new Date() }: Commute
 
       {/* Error banner if stale */}
       {error && !isStale && (
-        <div className="px-4 py-2 bg-status-tight/10 border-t border-status-tight text-sm text-status-tight">
-          ⚠ {error}
+        <div className="px-5 py-3 bg-status-tight/10 border-t border-status-tight/20 text-sm text-status-tight flex items-center gap-2">
+          <span className="text-lg">⚠</span> {error}
         </div>
       )}
     </div>
@@ -140,6 +142,8 @@ interface CardHeaderProps {
   isStale?: boolean;
   lastUpdated?: Date;
   now?: Date;
+  prepSeconds?: number;
+  bufferSeconds?: number;
 }
 
 function CardHeader({
@@ -149,26 +153,52 @@ function CardHeader({
   isStale,
   lastUpdated,
   now = new Date(),
+  prepSeconds = 0,
+  bufferSeconds = 0,
 }: CardHeaderProps) {
+  const prepMin = Math.round(prepSeconds / 60);
+  const bufferMin = Math.round(bufferSeconds / 60);
+  const hasExtraTime = prepMin > 0 || bufferMin > 0;
+
   return (
     <div className="flex items-start justify-between gap-4">
       <div>
         {/* Commute label */}
-        <h3 className="font-bold text-lg text-text-primary">
+        <h3 className="font-bold text-xl text-text-primary tracking-tight">
           {label || `${origin} → ${destination}`}
         </h3>
         {/* Origin to destination */}
-        {label && (
-          <p className="text-sm text-text-muted">
-            {origin} → {destination}
-          </p>
-        )}
+        <div className="flex flex-col gap-1 mt-1">
+          <div className="flex items-center gap-2 text-sm text-text-secondary font-medium">
+            <span className="px-2 py-0.5 bg-bg-tertiary rounded text-xs uppercase tracking-wider text-text-muted">FROM</span>
+            <span>{origin}</span>
+            <span className="text-text-muted">→</span>
+            <span className="px-2 py-0.5 bg-bg-tertiary rounded text-xs uppercase tracking-wider text-text-muted">TO</span>
+            <span>{destination}</span>
+          </div>
+          
+          {/* Prep & Buffer Info */}
+          {hasExtraTime && (
+            <div className="text-xs text-text-muted flex items-center gap-1.5 mt-1">
+              <span className="text-accent">⏱</span>
+              <span>Includes</span>
+              {prepMin > 0 && <span className="font-medium text-text-secondary">{prepMin}m prep</span>}
+              {prepMin > 0 && bufferMin > 0 && <span>+</span>}
+              {bufferMin > 0 && <span className="font-medium text-text-secondary">{bufferMin}m buffer</span>}
+            </div>
+          )}
+        </div>
       </div>
 
       {/* Stale indicator */}
       {isStale && lastUpdated && (
-        <div className="text-xs text-status-tight whitespace-nowrap">
-          ⚠ Data from {formatLastUpdated(lastUpdated, now)}
+        <div className="flex flex-col items-end text-right">
+          <div className="text-xs font-bold px-2 py-1 bg-status-tight text-white rounded uppercase tracking-wide">
+            Stale Data
+          </div>
+          <div className="text-xs text-text-muted mt-1">
+            Last updated {formatLastUpdated(lastUpdated, now)}
+          </div>
         </div>
       )}
     </div>

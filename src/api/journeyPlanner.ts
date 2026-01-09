@@ -447,12 +447,26 @@ function parseJourneyToTripProposal(journey: Record<string, unknown>): TripPropo
       return null;
     }
 
-    const legs: TripLeg[] = rawLegs
+    const legsRaw: TripLeg[] = rawLegs
       .map((leg) => parseLegV2(leg as Record<string, unknown>))
       .filter((l): l is TripLeg => l !== null);
 
-    if (legs.length === 0) {
+    if (legsRaw.length === 0) {
       return null;
+    }
+
+    // Merge consecutive walk legs to avoid "Walk to X" -> "Walk to X" duplicates
+    const legs: TripLeg[] = [];
+    for (const leg of legsRaw) {
+      const lastLeg = legs[legs.length - 1];
+      if (lastLeg && lastLeg.type === 'walk' && leg.type === 'walk') {
+        // Merge into previous leg
+        lastLeg.arrivalTime = leg.arrivalTime;
+        lastLeg.durationSeconds += leg.durationSeconds;
+        lastLeg.destinationName = leg.destinationName; // Keep the final destination of the walk sequence
+      } else {
+        legs.push(leg);
+      }
     }
 
     // Walk time before first public transport

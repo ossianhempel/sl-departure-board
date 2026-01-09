@@ -5,26 +5,7 @@
 
 import type { TripProposal as TripProposalType, LeaveCalculation } from "../types";
 import { getStatusDisplay } from "../lib/leaveNow";
-import { formatTime, formatDurationMinutes, formatDurationSeconds, formatCountdown } from "../lib/timeUtils";
-
-function getLegModeLabel(type: TripProposalType["legs"][number]["type"]): string {
-  switch (type) {
-    case "metro":
-      return "Metro";
-    case "train":
-      return "Train";
-    case "tram":
-      return "Tram";
-    case "bus":
-      return "Bus";
-    case "ship":
-      return "Ferry";
-    case "walk":
-      return "Walk";
-    default:
-      return "Transit";
-  }
-}
+import { formatTime, formatDurationMinutes, formatCountdown } from "../lib/timeUtils";
 
 function getLegEmoji(type: TripProposalType["legs"][number]["type"]): string {
   switch (type) {
@@ -80,77 +61,115 @@ export function TripProposal({
   return (
     <div
       className={`
-        border-l-4 pl-4 py-2
-        ${leaveCalc.status === "comfortable" ? "border-status-comfortable" : ""}
-        ${leaveCalc.status === "tight" ? "border-status-tight" : ""}
-        ${leaveCalc.status === "missed" ? "border-status-missed" : ""}
-        ${isRecommended ? "bg-bg-secondary" : ""}
+        relative rounded-xl p-4 transition-all duration-300 border
+        ${
+          leaveCalc.status === "comfortable"
+            ? "bg-green-50/50 border-green-200 hover:bg-green-50 hover:border-green-300 dark:bg-green-900/10 dark:border-green-900/30"
+            : ""
+        }
+        ${
+          leaveCalc.status === "tight"
+            ? "bg-amber-50/50 border-amber-200 hover:bg-amber-50 hover:border-amber-300 dark:bg-amber-900/10 dark:border-amber-900/30"
+            : ""
+        }
+        ${
+          leaveCalc.status === "missed"
+            ? "bg-red-50/30 border-red-100 opacity-75 dark:bg-red-900/5 dark:border-red-900/20"
+            : ""
+        }
+        ${isRecommended ? "ring-2 ring-accent ring-offset-2 ring-offset-bg-secondary shadow-md z-10 scale-[1.01]" : ""}
       `}
     >
-      {/* Leave time and status */}
+      {/* Recommended badge */}
+      {isRecommended && (
+        <div className="absolute -top-3 left-4 bg-accent text-white text-xs font-bold px-2 py-0.5 rounded-full shadow-sm uppercase tracking-wide">
+          Recommended
+        </div>
+      )}
+
+      {/* Main Row */}
       <div className="flex items-center justify-between gap-4">
-        <div className="flex items-center gap-2">
-          {/* Status icon with label for accessibility */}
-          <span
-            className={`font-bold text-lg ${statusDisplay.colorClass}`}
-            aria-label={statusDisplay.label}
+        
+        {/* Left: Status & Leave Time */}
+        <div className="flex items-center gap-3">
+          <div 
+            className={`
+              w-10 h-10 rounded-full flex items-center justify-center text-xl shadow-sm
+              ${leaveCalc.status === 'comfortable' ? 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400' : ''}
+              ${leaveCalc.status === 'tight' ? 'bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400' : ''}
+              ${leaveCalc.status === 'missed' ? 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400' : ''}
+            `}
           >
             {statusDisplay.icon}
-          </span>
-
-          {/* Leave message */}
-          <span
-            className={`font-semibold ${statusDisplay.colorClass} ${
-              leaveCalc.status === "missed" ? "line-through opacity-60" : ""
-            }`}
-          >
-            {leaveCalc.message}
-          </span>
+          </div>
+          
+          <div>
+            <div className="flex items-baseline gap-2">
+              <span className={`font-bold text-lg leading-none ${statusDisplay.colorClass}`}>
+                {leaveCalc.status === 'missed' ? 'Missed' : formatTime(leaveCalc.latestLeaveTime)}
+              </span>
+              {leaveCalc.status !== "missed" && (
+                <span className="text-xs font-medium text-text-muted uppercase tracking-wider">Leave at</span>
+              )}
+            </div>
+            <div className={`text-sm font-medium ${statusDisplay.colorClass}`}>
+              {leaveCalc.message}
+            </div>
+          </div>
         </div>
 
-        {/* Arrival time */}
+        {/* Right: Arrival Time */}
         <div className="text-right">
-          <span className="text-text-secondary">Arrive </span>
-          <span className="font-semibold">{formatTime(trip.arrivalTime)}</span>
+          <div className="flex flex-col items-end">
+             <span className="font-bold text-lg text-text-primary leading-none">
+              {formatTime(trip.arrivalTime)}
+            </span>
+             <span className="text-xs text-text-muted mt-0.5">Arrival</span>
+          </div>
         </div>
       </div>
 
-      {/* Live countdown ticker for trips you can still catch */}
-      {leaveCalc.status !== "missed" && (
-        <div className="mt-1 text-sm text-text-muted">
-          <span className="font-mono">Leave in {formatCountdown(secondsUntilLeave)}</span>
+      {/* Footer Info: Route & Countdown */}
+      <div className="mt-3 flex items-center justify-between text-sm pt-3 border-t border-black/5 dark:border-white/5">
+        <div className="flex items-center gap-2 text-text-secondary font-medium truncate max-w-[60%]">
+          <span>{trip.routeSummary}</span>
+          <span className="text-text-muted font-normal">• {formatDurationMinutes(trip.durationMinutes)}</span>
         </div>
-      )}
-
-      {/* Route summary and duration */}
-      {!compact && (
-        <div className="mt-1 flex items-center justify-between text-sm text-text-muted">
-          <span className="truncate max-w-[60%]">{trip.routeSummary}</span>
-          <span>{formatDurationMinutes(trip.durationMinutes)}</span>
-        </div>
-      )}
+        
+        {leaveCalc.status !== "missed" && (
+           <div className="font-mono text-sm font-semibold text-text-primary bg-bg-primary/50 px-2 py-0.5 rounded">
+             T-{formatCountdown(secondsUntilLeave)}
+           </div>
+        )}
+      </div>
 
       {/* Detailed legs (optional, for expanded view) */}
       {!compact && trip.legs.length > 1 && (
-        <div className="mt-2 text-xs text-text-muted">
+        <div className="mt-3 flex flex-wrap gap-y-2 text-xs text-text-secondary">
           {trip.legs.map((leg, index) => (
-            <span key={index}>
-              {index > 0 && " → "}
-              {leg.type === "walk" ? (
-                <span>
-                  {getLegEmoji(leg.type)} {getLegModeLabel(leg.type)}{" "}
-                  {formatDurationSeconds(leg.durationSeconds)} to{" "}
-                  {leg.destinationName.split(",")[0]}
+            <div key={index} className="flex items-center">
+              {index > 0 && <span className="mx-1 text-text-muted/40">→</span>}
+              <div className={`
+                flex items-center gap-1.5 px-2 py-1 rounded-md border
+                ${leg.type === 'walk' 
+                  ? 'bg-transparent border-dashed border-text-muted/30 text-text-primary' 
+                  : 'bg-white/50 dark:bg-white/5 border-black/5 dark:border-white/10 shadow-sm text-text-primary'}
+              `}>
+                <span className="text-sm">{getLegEmoji(leg.type)}</span>
+                <span className="truncate max-w-[120px]">
+                  {leg.type !== 'walk' && leg.line && <span className="font-bold mr-1">{leg.line}</span>}
+                  <span className={leg.type === 'walk' ? 'italic' : ''}>
+                    {leg.type === 'walk' ? 'Walk to ' : ''}
+                    {leg.destinationName?.split(',')[0]}
+                  </span>
                 </span>
-              ) : (
-                <span>
-                  {getLegEmoji(leg.type)} {getLegModeLabel(leg.type)}
-                  {leg.line ? ` line ${leg.line}` : ""} ·{" "}
-                  {formatDurationSeconds(leg.durationSeconds)} to{" "}
-                  {leg.destinationName.split(",")[0]}
+                <span className="text-[10px] font-medium opacity-60 ml-0.5 whitespace-nowrap">
+                   {leg.durationSeconds >= 60 
+                     ? `${Math.round(leg.durationSeconds / 60)}m` 
+                     : `${leg.durationSeconds}s`}
                 </span>
-              )}
-            </span>
+              </div>
+            </div>
           ))}
         </div>
       )}
